@@ -24,6 +24,10 @@ sparkComponents ++= Seq("streaming", "sql")
 
 javacOptions ++= Seq("-source", "1.8", "-target", "1.8")
 
+assemblyShadeRules in assembly := Seq(
+  ShadeRule.rename("com.google.**" -> "shadeio.@1").inAll
+)
+
 assemblyOption in assembly := (assemblyOption in assembly).value.copy(
 	includeScala = false
 )
